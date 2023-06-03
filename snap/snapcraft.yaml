@@ -1,0 +1,64 @@
+name: powerscheduler
+version: '0.1'
+summary: Shutdown scheduler for Ubuntu Core systems.
+description: |
+  This snap provides a basic shutdown scheduler for Ubuntu Core systems.
+  To setup your scheduling, use: curl --header "Content-Type: application/json" --request POST --data '{
+    "mon": null,
+    "tue": "20:48:00",
+    "wed": "23:07:10",
+    "thu": "08:39:00",
+    "fri": null,
+    "sat": "18:44:35",
+    "sun": null
+  }' http://target-ip-address:3535/set-shutdown-schedule
+
+grade: stable
+#confinement: devmode #This is for development only. Unconfined snap environment. For production, use strict.
+confinement: strict #This is for production only.
+base: core22
+
+apps:
+  api:
+    command: bin/flask-wrapper
+    daemon: simple
+    restart-condition: always
+    plugs: [network-bind, shutdown]
+    environment:
+      FLASK_APP: ./api.py
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+
+  scheduler:
+    command: bin/python3 $SNAP/bin/scheduler.py
+    daemon: simple
+    restart-condition: always
+    plugs: [network, network-bind, shutdown]
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+
+  python:
+    command: bin/python3
+    plugs: [home, network, network-bind, shutdown]
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+
+parts:
+  #Install all packages from requirements
+  python-packages:
+    plugin: python
+    source: flask
+    python-requirements: ['requirements.txt']
+
+  #Copy the flask api
+  flask-server:
+    plugin: dump
+    source: flask
+    organize:
+      api.py: bin/
+      cancel.py: bin/
+      flask-wrapper: bin/
+      requirements.txt: bin/
+      scheduler.py: bin/
