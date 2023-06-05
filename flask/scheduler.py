@@ -30,9 +30,6 @@ def setup_shutdown_scheduler(schedule_payload):
         schedule.run_pending()
         time.sleep(1)
 
-def cancel_shutdown_scheduler():
-    schedule.clear()
-
 if __name__ == '__main__':
     if(len(sys.argv) > 1):
         file_path = sys.argv[1]
@@ -57,5 +54,4 @@ if __name__ == '__main__':
     with open(file_path, 'r') as file:
         schedule_payload = json.load(file)
 
-    cancel_shutdown_scheduler()
     setup_shutdown_scheduler(schedule_payload)
