@@ -1,8 +1,8 @@
 name: powerscheduler
 version: '0.1'
-summary: Shutdown scheduler for Ubuntu Core systems.
+summary: Shutdown scheduler for Ubuntu and Ubuntu Core systems.
 description: |
-  This snap provides a basic shutdown scheduler for Ubuntu Core systems.
+  This snap provides a basic shutdown scheduler for Ubuntu and Ubuntu Core systems.
   To setup your scheduling, use: curl --header "Content-Type: application/json" --request POST --data '{
     "mon": null,
     "tue": "20:48:00",

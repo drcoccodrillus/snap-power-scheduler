@@ -68,7 +68,7 @@ def cancel_shutdown():
 
         return jsonify(status='OK', message='Shutdown schedule cancelled successfully')
     except Exception as e:
-        return jsonify(status='KO', message='Shutdown schedule cancelled error', error=str(e))
+        return jsonify(status='KO', message='Shutdown schedule elimination error', error=str(e))
 
 if __name__ == '__main__':
     app.run()
