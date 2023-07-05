@@ -1,5 +1,5 @@
 name: powerscheduler
-version: '0.1'
+version: '0.2'
 summary: Shutdown scheduler for Ubuntu and Ubuntu Core systems.
 description: |
   This snap provides a basic shutdown scheduler for Ubuntu and Ubuntu Core systems.

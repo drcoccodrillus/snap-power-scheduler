@@ -22,9 +22,21 @@ def setup_shutdown_scheduler(schedule_payload):
 
     for day in days_of_week:
         if day in schedule_payload and schedule_payload[day] is not None:
-            shutdown_time = schedule_payload[day]
-            schedule_time = datetime.datetime.strptime(shutdown_time, "%H:%M:%S")
-            schedule.every().day.at(schedule_time.strftime("%H:%M")).do(system_shutdown)
+            schedule_time = datetime.datetime.strptime(schedule_payload[day], "%H:%M:%S")
+            if day == "sun":
+                schedule.every().sunday.at(schedule_time.strftime("%H:%M")).do(system_shutdown)
+            elif day == "mon":
+                schedule.every().monday.at(schedule_time.strftime("%H:%M")).do(system_shutdown)
+            elif day == "tue":
+                schedule.every().tuesday.at(schedule_time.strftime("%H:%M")).do(system_shutdown)
+            elif day == "wed":
+                schedule.every().wednesday.at(schedule_time.strftime("%H:%M")).do(system_shutdown)
+            elif day == "thu":
+                schedule.every().thursday.at(schedule_time.strftime("%H:%M")).do(system_shutdown)
+            elif day == "fri":
+                schedule.every().friday.at(schedule_time.strftime("%H:%M")).do(system_shutdown)
+            elif day == "sat":
+                schedule.every().saturday.at(schedule_time.strftime("%H:%M")).do(system_shutdown)
 
     while True:
         schedule.run_pending()
