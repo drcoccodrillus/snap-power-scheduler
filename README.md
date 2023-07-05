@@ -29,14 +29,16 @@ If you prefer to install the snap from a local file, follow the instructions bel
 
 For installing the snap in devmode from a local file, use the following command:
 
-`snap install powerscheduler_0.1_amd64.snap --dangerous --devmode`
+`snap install powerscheduler_0.2_amd64.snap --dangerous --devmode`
 
 For installing the snap in confined mode from a local file, use the following command:
 
-`snap install powerscheduler_0.1_amd64.snap --dangerous`
+`snap install powerscheduler_0.2_amd64.snap --dangerous`
 
 ## Snap configuration
-After installing the snap, you need to connect the snap to the following interfaces:
+If you install the snap from the snap store, you don't need to do anything else. Also the shutdown interface will be automatically connected.
+
+Instead, if you install the snap from a local file, you need to connect the snap to the following interfaces:
 - `snap connect powerscheduler:shutdown`
 
 ## Usage
